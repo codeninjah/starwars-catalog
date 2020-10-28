@@ -3,6 +3,7 @@
 async function getStarWarsData() {
     const req = await fetch ('https://swapi.dev/api/films')
     const res = await req.json()
+    // console.log(res.results);
 
     return res
     
@@ -10,11 +11,11 @@ async function getStarWarsData() {
 
 var resultPromise = getStarWarsData();
 
-resultPromise.then(function(result) {
-    for( var r of result.results){
-        return r
+let abc = resultPromise.then(function(result) {
+    for( var i = 0; i< result.results.length; i++){
+        console.log(result.results[i].name);
     }
     // console.log('got result', result.results);
 });
 
-console.log(getStarWarsData());
+console.log(resultPromise);
