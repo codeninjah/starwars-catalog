@@ -30,8 +30,30 @@ resultPromise.then(function(result) {
 
     a.innerHTML += "</ul>"
     //SLUT PÅ KARAKTÄRS RUTAN
-    
+
+        // TEST FÖR DETAILS RUTAN
+        var testvariable = result.results[8]
+
+        var height = testvariable.height
+        var mass = testvariable.mass
+        var hair_color = testvariable.hair_color
+        var skin_color = testvariable.skin_color
+        var eye_color = testvariable.eye_color
+        var birth_year = testvariable.birth_year
+        var gender = testvariable.gender
+
+        var info = height + " " + mass + " " + hair_color
+        info += " " + skin_color + " " + eye_color + " "
+        info += birth_year + " " + gender
+
+
+        console.log(info)
     // console.log('got result', result.results);
+
+    //GRUNDEN FÖR BEARBETNINGEN KOD FÖR PLANETER- RUTAN
+    console.log("Planet")
+    console.log(testvariable.homeworld.results[testvariable].name)
+
 });
 
 getStarWarsData()
