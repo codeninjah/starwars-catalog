@@ -1,4 +1,3 @@
-console.log("Test")
 
 //GRUNDEN TILL ATT FÅ FRAM DATA FRÅN ETT API PÅ ETT ASYNCRONT SÄTT
 async function getStarWarsData() {
@@ -12,21 +11,10 @@ async function getStarWarsData() {
 var resultPromise = getStarWarsData();
 
 resultPromise.then(function(result) {
-    console.log('got result', result);
+    for( var r of result.results){
+        return r
+    }
+    // console.log('got result', result.results);
 });
 
-//}
-
-/*
-var promise = new Promise(function(resolve, reject)
-*/
-
-/*
-promise.then(function(result) {
-    console.log("Success!", result); // "Stuff worked!"
-  }, function(err) {
-    console.log("Failed!", err); // Error: "It broke"
-  });
-  */
-
-getStarWarsData()
+console.log(getStarWarsData());
