@@ -18,16 +18,16 @@ header{
 h1{
     letter-spacing: 8px;
     font-weight: 300;
-    font-size: 50px;
+    font-size: 56px;
     padding-left: 60px;
 }
 
 h2{
     display: flex;
     height: 60px;
-    font-size: 24px;
-    font-weight: 400;
-    letter-spacing: 4px;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 6px;
     justify-content: center;
     align-items: center;
     background: rgba(83, 85, 86, 1);
@@ -35,11 +35,19 @@ h2{
     border-top-left-radius: 10px;
 }
 
+.right h2{
+    background-color: rgba(116, 134, 135, 1);
+}
+
 
 h1,h2{
     font-family: Ropa Sans;
-    color: yellow;
+    color: rgba(255, 214, 0, 1);
 }
+li{
+    font-family: 'Roboto', sans-serif;
+}
+
 main{
     display: flex;
     justify-content: center;
@@ -71,4 +79,16 @@ main{
 .planet-spec{
     background-color: rgba(142, 142, 142, 1);
     color: white;
+}
+
+
+li{
+    display: flex;
+    align-items: center;
+    list-style: none;
+    font-size: 22px;
+    height: 42px;
+    padding-left: 22px;
+    color: white;
+    background-color: rgba(142, 142, 142, 1);
 }
