@@ -44,7 +44,8 @@ h1,h2{
     font-family: Ropa Sans;
     color: rgba(255, 214, 0, 1);
 }
-li{
+li,
+p{
     font-family: 'Roboto', sans-serif;
 }
 
@@ -102,4 +103,20 @@ li:hover{
     background-color: rgba(142, 142, 142, 1);
     color: white;
     
+}
+
+.character-spec,
+.planet.spec{
+    padding: 0 20px;
+}
+
+p{
+    letter-spacing: 0.2em;
+    line-height: 22px;
+    font-weight: 600;
+}
+
+.character-spec p:nth-child(1){
+    font-size: 28px;
+    padding: 10px 0px;
 }

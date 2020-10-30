@@ -6,16 +6,11 @@ async function getStarWarsData() {
 
     return res 
 }
-
 var resultPromise = getStarWarsData();
 
-resultPromise.then(function(result) {
-    /*
-    for( var r of result.results){
-        return r.name
-    }
-    */
 
+
+resultPromise.then(function(result) {
     // KARAKTÄR KOLUMNEN
     var a = document.getElementsByClassName("character")[0]
     a.innerHTML = "<ul>"
@@ -27,8 +22,20 @@ resultPromise.then(function(result) {
             document.getElementsByTagName("li")[i].classList.add("bg-color")
         }
     }
+    // PRINTAR INFORMATION OM EN HÅRDKODAD CHARACTER
+    var b = document.getElementsByClassName("character-spec")[0]
+    b.innerHTML += "<p>" + result.results[0].name + "</p>"
+    b.innerHTML += "<p>" + "Height: " + result.results[0].height + "</p>"
+    b.innerHTML += "<p>" + "Mass: " + result.results[0].mass + "</p>"
+    b.innerHTML += "<p>" + "Hair color: " + result.results[0].hair_color + "</p>"
+    b.innerHTML += "<p>" + "Skin color: " + result.results[0].skin_color + "</p>"
+    b.innerHTML += "<p>" + "Eye color: " + result.results[0].eye_color + "</p>"
+    b.innerHTML += "<p>" + "Birth_year: " + result.results[0].birth_year + "</p>"
+    b.innerHTML += "<p>" + "Gender: " + result.results[0].gender + "</p>"
+    
 
-    a.innerHTML += "</ul>"
+    // a.innerHTML += "</ul>"
+
     //SLUT PÅ KARAKTÄRS RUTAN
 
         // TEST FÖR DETAILS RUTAN
@@ -52,7 +59,7 @@ resultPromise.then(function(result) {
 
     //GRUNDEN FÖR BEARBETNINGEN KOD FÖR PLANETER- RUTAN
     console.log("Planet")
-    console.log(testvariable.homeworld.results[testvariable].name)
+    // console.log(testvariable.homeworld.results[testvariable].name)
 
 });
 
