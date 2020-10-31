@@ -6,7 +6,21 @@ async function getStarWarsData() {
 
     return res 
 }
+
+//FETCHAR IFRÅN PLANET API'ET
+//BEHÖVS OM VI SKA HA KARAKTÄRERS HOMEWORLD
+async function getStarWarsPlanet() {
+    const reqplanet = await fetch ('https://swapi.dev/api/planets/')
+    const resplanet = await reqplanet.json()
+
+    return resplanet
+}
+
+
 var resultPromise = getStarWarsData();
+
+//RESULTATEN ANGÅENDE PLANET
+var resultHomeworld = getStarWarsPlanet();
 
 
 
