@@ -7,20 +7,7 @@ async function getStarWarsData() {
     return res 
 }
 
-//FETCHAR IFRÅN PLANET API'ET
-//BEHÖVS OM VI SKA HA KARAKTÄRERS HOMEWORLD
-async function getStarWarsPlanet() {
-    const reqplanet = await fetch ('https://swapi.dev/api/planets/')
-    const resplanet = await reqplanet.json()
-
-    return resplanet
-}
-
-
 var resultPromise = getStarWarsData();
-
-//RESULTATEN ANGÅENDE PLANET
-var resultHomeworld = getStarWarsPlanet();
 
 
 
@@ -77,5 +64,29 @@ resultPromise.then(function(result) {
 
 });
 
-getStarWarsData()
+
+
+
+//RESULTATEN ANGÅENDE PLANET
+//FETCHAR IFRÅN PLANET API'ET
+//BEHÖVS OM VI SKA HA KARAKTÄRERS HOMEWORLD
+async function getStarWarsPlanet() {
+    const reqplanet = await fetch ('https://swapi.dev/api/planets')
+    const resplanet = await reqplanet.json()
+
+    return resplanet
+}
+
+var homeworldPromise = getStarWarsPlanet();
+
+homeworldPromise.then(function(result) { 
+    for(var i = 0; i < result.results; i++) {
+        console.log(result.results[i].name)
+    }
+});
+
+//getStarWarsData()
 resultPromise
+
+getStarWarsPlanet()
+homeworldPromise
