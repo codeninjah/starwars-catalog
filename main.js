@@ -5,7 +5,7 @@ async function getStarWarsData() {
     const res = await req.json()
 
     return res 
-}
+};
 
 var resultPromise = getStarWarsData();
 
@@ -65,8 +65,6 @@ resultPromise.then(function(result) {
 });
 
 
-
-
 //RESULTATEN ANGÅENDE PLANET
 //FETCHAR IFRÅN PLANET API'ET
 //BEHÖVS OM VI SKA HA KARAKTÄRERS HOMEWORLD
@@ -75,18 +73,24 @@ async function getStarWarsPlanet() {
     const resplanet = await reqplanet.json()
 
     return resplanet
-}
+};
 
 var homeworldPromise = getStarWarsPlanet();
 
-homeworldPromise.then(function(result) { 
-    for(var i = 0; i < result.results; i++) {
-        console.log(result.results[i].name)
+//HAR TESTAT MED BÅDE "result" samt "result2" och det ger samma resultat
+homeworldPromise.then(function(result2) { 
+    
+    //INGET HÄNDER
+    for(var i = 0; i < result2.results; i++) {
+        console.log(result2.results[i].name)
     }
+    
+    //DETTA FUNKAR DOCK
+   console.log(result2.count) // --> output: 60 (RÄTT)
 });
 
-//getStarWarsData()
-resultPromise
+getStarWarsData()
+//resultPromise
 
-getStarWarsPlanet()
-homeworldPromise
+getStarWarsPlanet() //
+//homeworldPromise
