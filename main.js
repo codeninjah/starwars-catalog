@@ -77,16 +77,13 @@ async function getStarWarsPlanet() {
 
 var homeworldPromise = getStarWarsPlanet();
 
-//HAR TESTAT MED BÅDE "result" samt "result2" och det ger samma resultat
-homeworldPromise.then(function(result2) { 
+homeworldPromise.then(function(result) { 
     
-    //INGET HÄNDER
-    for(var i = 0; i < result2.results; i++) {
-        console.log(result2.results[i].name)
+    //LOOPAR IGENOM
+    for(var i = 0; i < result.results.length; i++) {
+        console.log(result.results[i].name)
     }
-    
-    //DETTA FUNKAR DOCK
-   console.log(result2.count) // --> output: 60 (RÄTT)
+
 });
 
 getStarWarsData()
