@@ -1,3 +1,10 @@
+//CSS ANIMATIONS
+if(document.getElementsByClassName("planet-spec")[0].innerText.length == 0){
+    document.getElementsByClassName("planet-spec")[0].classList.add("lds-ring")
+}
+else if(document.getElementsByClassName("planet-spec")[0].innerText.length > 0){
+    document.getElementsByClassName("planet-spec")[0].classList.remove("lds-ring")
+}
 
 //GRUNDEN TILL ATT FÅ FRAM DATA FRÅN ETT API PÅ ETT ASYNCRONT SÄTT
 async function getStarWarsData() {
