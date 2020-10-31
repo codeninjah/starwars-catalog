@@ -6,6 +6,8 @@ else if(document.getElementsByClassName("planet-spec")[0].innerText.length > 0){
     document.getElementsByClassName("planet-spec")[0].classList.remove("lds-ring")
 }
 
+
+
 //GRUNDEN TILL ATT FÅ FRAM DATA FRÅN ETT API PÅ ETT ASYNCRONT SÄTT
 async function getStarWarsData() {
     const req = await fetch ('https://swapi.dev/api/people')
