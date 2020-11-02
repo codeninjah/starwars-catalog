@@ -7,13 +7,15 @@ else if(document.getElementsByClassName("planet-spec")[0].innerText.length > 0){
 }
 // -------------------------------------------------------------------------------------
 
+// GLOBALA VARIABLER------------------------------------------------------------
+let pageNum = 1 // Vi hämtar en character list från den första page som finns i API
+let nombreTest = "Luke Skywalker" //Global funktion som vi använder för att hitta char Index
 
 
 
 //GRUNDEN TILL ATT FÅ FRAM DATA FRÅN ETT API PÅ ETT ASYNCRONT SÄTT------------------
-let pageNum = 1
-async function getStarWarsData(page) {
-    const req = await fetch (`https://swapi.dev/api/people/?page= + ${page}`)
+async function getStarWarsData(page) {//Gjorde om så att funktionene tar emot ett page number variabel som parameter
+    const req = await fetch (`https://swapi.dev/api/people/?page= + ${page}`) // här blir våran fetch dynamiskt beroende på vilken sida man vill fetcha
     const res = await req.json()
     return res
 };
@@ -23,14 +25,13 @@ var resultPromise = getStarWarsData(pageNum);
 
 
 //------------------------------------FUNKTION SOM PRINTAR ALLA CHARACTERS!!!---------
-async function print() {
-    let result = await getStarWarsData(pageNum)
+async function print() { //Skapar en funktion som enbart printar en lista på characters
+    let result = await getStarWarsData(pageNum) // Sparar listan på ett variabel "result"
 
     var a = document.getElementsByClassName("character")[0]
     a.innerHTML = "<ul>"
 
     for(var i = 0; i < result.results.length; i++){
-        // console.log(result.results[i].name)
         a.innerHTML += "<li>" + result.results[i].name + "</li>"
         if(i % 2 == 0) {
             document.getElementsByTagName("li")[i].classList.add("bg-color")
@@ -42,14 +43,13 @@ print()
 
 
 // PRINTAR INFORMATION OM EN HÅRDKODAD CHARACTER------------------------------------
-let nombreTest = "Luke Skywalker"
 async function clickOnCharacter(charName) {
-    let charInfo = await getStarWarsData(pageNum)
-    // console.log(charInfo.results)
-    for (let i = 0; i < charInfo.results.length; i++) {
-        console.log(charInfo.results[i].name)
-        if (charName == charInfo.results[i].name) {
+    let charInfo = await getStarWarsData(pageNum)// väntar på info från API
+
+    for (let i = 0; i < charInfo.results.length; i++){//loopar igenom hela character listan 
+        if (charName == charInfo.results[i].name) {// söker efter en match
             var b = document.getElementsByClassName("character-spec")[0]
+            //När den hittar en match använder vi oss av dess index för att hämta resterande data
             b.innerHTML += "<p>" + charInfo.results[i].name + "</p>"
             b.innerHTML += "<p>" + "Height: " + charInfo.results[i].height + "</p>"
             b.innerHTML += "<p>" + "Mass: " + charInfo.results[i].mass + "</p>"
@@ -105,7 +105,7 @@ function nextPage() {
     if (pageNum < 9) {
         pageNum++
     }else{
-        pageNum = 1
+        pageNum = 1 // När man kommer till sista sidan kommer den att returnera dig till första
     }
     getStarWarsData(pageNum)
     print()
@@ -115,7 +115,7 @@ function nextPage() {
 
  function previousPage() {
     if (pageNum > 1) {
-        pageNum--
+        pageNum-- // När man inte kan backa mer kommer den att skicka dig till sista sidan
     }else{
         pageNum = 9
     }
