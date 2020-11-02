@@ -59,14 +59,8 @@ async function clickOnCharacter(charName) {
     document.querySelector(".loader-right").classList.remove("hidden")
     let charInfo = await getStarWarsData(pageNum)// väntar på info från API
 
-<<<<<<< Updated upstream
     // b.innerHTML = ""
     
-=======
-    //DETTA HAR LAGTS TILL
-    document.getElementsByClassName("character-spec")[0].innerText = ""
-
->>>>>>> Stashed changes
     for (let i = 0; i < charInfo.results.length; i++){//loopar igenom hela character listan 
         if (charName == charInfo.results[i].name) {// söker efter en match
             var b = document.getElementsByClassName("character-spec")[0]
