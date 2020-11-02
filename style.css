@@ -87,7 +87,7 @@ li{
     display: flex;
     align-items: center;
     list-style: none;
-    font-size: 22px;
+    font-size: 20px;
     height: 42px;
     padding-left: 22px;
     background-color:  rgba(225, 222, 222, 1);
@@ -126,7 +126,7 @@ p{
 /* LOADING ANIMATIONS */
 /* SOURCE: https://loading.io/css/ */
 
-.lds-ring {
+/* .lds-ring {
     display: inline-block;
     position: relative;
     width: 80px;
@@ -135,7 +135,7 @@ p{
 
   /* Man kan ta bort p taget för att se vad som sker */
   /* Det funkar nu MEN behöver mer anpassning när man kommer att behöva använda animationen på andra ställen också */
-  .lds-ring p {
+  /* .lds-ring p {
     box-sizing: border-box;
     display: block;
     position: absolute;
@@ -146,21 +146,21 @@ p{
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color:#fff transparent transparent transparent;
-  }
+  }  */
 
 
-  @keyframes lds-ring {
+  /* @keyframes lds-ring {
     0% {
       transform: rotate(0deg);
     }
     100% {
       transform: rotate(360deg);
     }
-  }
+  } */
 
 
   /* LOADER TEST */
-  .loader {
+  /* .loader {
     color: #030303;
     font-size: 20px;
     margin: 100px auto;
@@ -228,8 +228,33 @@ p{
     87.5% {
       box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
     }
-  }
+  } */
 
 .hidden{
       display: none;
+  }
+
+  /* RESPONSIVE------------------------------------ */
+
+  @media screen and (max-width: 760px){
+      li{
+          font-size: 14px;
+      }
+
+      h1{
+        letter-spacing: 6px;
+        font-size: 38px;
+        padding-left: 30px;
+    }
+
+      p{
+        letter-spacing: 0.2em;
+        line-height: 18px;
+        font-weight: 600;
+        font-size: 12px;
+    }
+    .character-spec p:nth-child(1){
+        font-size: 18px;
+        padding: 10px 0px;
+    }
   }

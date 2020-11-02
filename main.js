@@ -28,6 +28,8 @@ var resultPromise = getStarWarsData(pageNum);
 async function print() { //Skapar en funktion som enbart printar en lista på characters
     let result = await getStarWarsData(pageNum) // Sparar listan på ett variabel "result"
 
+    document.querySelector(".loader").classList.remove("hidden")
+
     var a = document.getElementsByClassName("character")[0]
     a.innerHTML = "<ul>"
 
@@ -38,6 +40,7 @@ async function print() { //Skapar en funktion som enbart printar en lista på ch
         }
         document.getElementsByTagName("li")[i].classList.add("testAddClass")
     }
+    document.querySelector(".loader").classList.add("hidden")
     // Vi lägger till en eventlistener här:
       let charInfo = document.querySelectorAll(".character li")
          for (let i = 0; i < charInfo.length; i++) {
