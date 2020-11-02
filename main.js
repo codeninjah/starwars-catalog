@@ -8,42 +8,71 @@ else if(document.getElementsByClassName("planet-spec")[0].innerText.length > 0){
 
 
 
+
 //GRUNDEN TILL ATT FÅ FRAM DATA FRÅN ETT API PÅ ETT ASYNCRONT SÄTT
-async function getStarWarsData() {
-    const req = await fetch ('https://swapi.dev/api/people')
+let pageNum = 1
+async function getStarWarsData(page) {
+    const req = await fetch (`https://swapi.dev/api/people/?page= + ${page}`)
     const res = await req.json()
-
-    return res 
+    return res
 };
-
-var resultPromise = getStarWarsData();
-
+var resultPromise = getStarWarsData(pageNum);
 
 
-resultPromise.then(function(result) {
-    // KARAKTÄR KOLUMNEN
+
+//------------------------------------FUNKTION SOM PRINTAR ALLA CHARACTERS!!!---------
+async function print() {
+    let result = await getStarWarsData(pageNum)
+
     var a = document.getElementsByClassName("character")[0]
     a.innerHTML = "<ul>"
 
     for(var i = 0; i < result.results.length; i++){
-        console.log(result.results[i].name)
+        // console.log(result.results[i].name)
         a.innerHTML += "<li>" + result.results[i].name + "</li>"
         if(i % 2 == 0) {
             document.getElementsByTagName("li")[i].classList.add("bg-color")
         }
     }
-    // PRINTAR INFORMATION OM EN HÅRDKODAD CHARACTER
-    var b = document.getElementsByClassName("character-spec")[0]
-    b.innerHTML += "<p>" + result.results[0].name + "</p>"
-    b.innerHTML += "<p>" + "Height: " + result.results[0].height + "</p>"
-    b.innerHTML += "<p>" + "Mass: " + result.results[0].mass + "</p>"
-    b.innerHTML += "<p>" + "Hair color: " + result.results[0].hair_color + "</p>"
-    b.innerHTML += "<p>" + "Skin color: " + result.results[0].skin_color + "</p>"
-    b.innerHTML += "<p>" + "Eye color: " + result.results[0].eye_color + "</p>"
-    b.innerHTML += "<p>" + "Birth_year: " + result.results[0].birth_year + "</p>"
-    b.innerHTML += "<p>" + "Gender: " + result.results[0].gender + "</p>"
-    
+}
+print()
 
+//----------------------------------
+resultPromise.then(function(result) {
+    // KARAKTÄR KOLUMNEN
+    // var a = document.getElementsByClassName("character")[0]
+    // a.innerHTML = "<ul>"
+
+    // for(var i = 0; i < result.results.length; i++){
+    //     // console.log(result.results[i].name)
+    //     a.innerHTML += "<li>" + result.results[i].name + "</li>"
+    //     if(i % 2 == 0) {
+    //         document.getElementsByTagName("li")[i].classList.add("bg-color")
+    //     }
+    // }
+ 
+
+   // PRINTAR INFORMATION OM EN HÅRDKODAD CHARACTER
+let nombreTest = "Luke Skywalker"
+async function clickOnCharacter(charName) {
+    let charInfo = await getStarWarsData(pageNum)
+    // console.log(charInfo.results)
+    for (let i = 0; i < charInfo.results.length; i++) {
+        console.log(charInfo.results[i].name)
+        if (charName == charInfo.results[i].name) {
+            var b = document.getElementsByClassName("character-spec")[0]
+            b.innerHTML += "<p>" + charInfo.results[i].name + "</p>"
+            b.innerHTML += "<p>" + "Height: " + charInfo.results[i].height + "</p>"
+            b.innerHTML += "<p>" + "Mass: " + charInfo.results[i].mass + "</p>"
+            b.innerHTML += "<p>" + "Hair color: " + charInfo.results[i].hair_color + "</p>"
+            b.innerHTML += "<p>" + "Skin color: " + charInfo.results[i].skin_color + "</p>"
+            b.innerHTML += "<p>" + "Eye color: " + charInfo.results[i].eye_color + "</p>"
+            b.innerHTML += "<p>" + "Birth_year: " + charInfo.results[i].birth_year + "</p>"
+            b.innerHTML += "<p>" + "Gender: " + charInfo.results[i].gender + "</p>"
+        }
+    }
+}
+clickOnCharacter(nombreTest)
     // a.innerHTML += "</ul>"
 
     //SLUT PÅ KARAKTÄRS RUTAN
@@ -64,11 +93,11 @@ resultPromise.then(function(result) {
         info += birth_year + " " + gender
 
 
-        console.log(info)
+        // console.log(info)
     // console.log('got result', result.results);
 
     //GRUNDEN FÖR BEARBETNINGEN KOD FÖR PLANETER- RUTAN
-    console.log("Planet")
+    // console.log("Planet")
     // console.log(testvariable.homeworld.results[testvariable].name)
 
 });
@@ -86,11 +115,11 @@ async function getStarWarsPlanet() {
 
 var homeworldPromise = getStarWarsPlanet();
 
-homeworldPromise.then(function(result) { 
-    
+homeworldPromise.then(function(result) {
+
     //LOOPAR IGENOM
     for(var i = 0; i < result.results.length; i++) {
-        console.log(result.results[i].name)
+        // console.log(result.results[i].name)
     }
 
 });
@@ -100,3 +129,27 @@ getStarWarsData()
 
 getStarWarsPlanet() //
 //homeworldPromise
+
+//--------------------- KNAPPAR PREVIOUS AND NEXT---------------------
+function nextPage() {
+    if (pageNum < 9) {
+        pageNum++
+    }else{
+        pageNum = 1
+    }
+    getStarWarsData(pageNum)
+    print()
+    console.log(pageNum)
+ }
+        
+
+ function previousPage() {
+    if (pageNum > 1) {
+        pageNum--
+    }else{
+        pageNum = 9
+    }
+    getStarWarsData(pageNum)
+    print()
+    console.log(pageNum)
+}
