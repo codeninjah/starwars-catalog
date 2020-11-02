@@ -36,14 +36,27 @@ async function print() { //Skapar en funktion som enbart printar en lista på ch
         if(i % 2 == 0) {
             document.getElementsByTagName("li")[i].classList.add("bg-color")
         }
+        document.getElementsByTagName("li")[i].classList.add("testAddClass")
     }
+    // Vi lägger till en eventlistener här:
+      let charInfo = document.querySelectorAll(".character li")
+         for (let i = 0; i < charInfo.length; i++) {
+             console.log(charInfo.length)
+             charInfo[i].addEventListener("click", function(){
+                 console.log("click")
+                 clickOnCharacter(charInfo[i].innerText)
+            //  nombreTest = charInfo[i].innerText
+             })
+           }
 }
 print()
+
 //------------------------------------------------------------------------------------
 
 
 // PRINTAR INFORMATION OM EN HÅRDKODAD CHARACTER------------------------------------
 async function clickOnCharacter(charName) {
+    document.querySelector(".loader").classList.remove("hidden")
     let charInfo = await getStarWarsData(pageNum)// väntar på info från API
 
     for (let i = 0; i < charInfo.results.length; i++){//loopar igenom hela character listan 
@@ -60,8 +73,10 @@ async function clickOnCharacter(charName) {
             b.innerHTML += "<p>" + "Gender: " + charInfo.results[i].gender + "</p>"
         }
     }
+    document.querySelector(".loader").classList.add("hidden")
 }
-clickOnCharacter(nombreTest)
+// clickOnCharacter(nombreTest)
+
 // ----------------------------------------------------------------------------------
 
 
@@ -122,4 +137,9 @@ function nextPage() {
     getStarWarsData(pageNum)
     print()
     console.log(pageNum)
+
 }
+// EVENT LISTENER-------------------------------------------------
+
+
+
