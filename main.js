@@ -54,11 +54,13 @@ print()
 //------------------------------------------------------------------------------------
 
 
-// PRINTAR INFORMATION OM EN HÅRDKODAD CHARACTER------------------------------------
+// PRINTAR INFORMATION OM EN CHARACTER------------------------------------
 async function clickOnCharacter(charName) {
-    document.querySelector(".loader").classList.remove("hidden")
+    document.querySelector(".loader-right").classList.remove("hidden")
     let charInfo = await getStarWarsData(pageNum)// väntar på info från API
 
+    // b.innerHTML = ""
+    
     for (let i = 0; i < charInfo.results.length; i++){//loopar igenom hela character listan 
         if (charName == charInfo.results[i].name) {// söker efter en match
             var b = document.getElementsByClassName("character-spec")[0]
@@ -73,7 +75,7 @@ async function clickOnCharacter(charName) {
             b.innerHTML += "<p>" + "Gender: " + charInfo.results[i].gender + "</p>"
         }
     }
-    document.querySelector(".loader").classList.add("hidden")
+    document.querySelector(".loader-right").classList.add("hidden")
 }
 // clickOnCharacter(nombreTest)
 

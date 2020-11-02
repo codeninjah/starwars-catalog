@@ -97,6 +97,7 @@ li{
 li:hover{
     background-color: #444444;
     color: white;
+    cursor: pointer;
 }
 
 .bg-color{
