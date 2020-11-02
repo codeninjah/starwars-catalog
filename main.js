@@ -61,9 +61,6 @@ async function clickOnCharacter(charName) {
 
     // b.innerHTML = ""
     
-    //DETTA HAR LAGTS TILL NU
-    document.getElementsByClassName("character-spec")[0].innerText = ""
-
     for (let i = 0; i < charInfo.results.length; i++){//loopar igenom hela character listan 
         if (charName == charInfo.results[i].name) {// söker efter en match
             var b = document.getElementsByClassName("character-spec")[0]
