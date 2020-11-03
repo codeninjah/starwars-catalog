@@ -38,15 +38,14 @@ async function print() { //Skapar en funktion som enbart printar en lista på ch
         if(i % 2 == 0) {
             document.getElementsByTagName("li")[i].classList.add("bg-color")
         }
-        document.getElementsByTagName("li")[i].classList.add("testAddClass")
     }
+
     document.querySelector(".loader").classList.add("hidden")
     // Vi lägger till en eventlistener här:
       let charInfo = document.querySelectorAll(".character li")
          for (let i = 0; i < charInfo.length; i++) {
              charInfo[i].addEventListener("click", function(){
                  clickOnCharacter(charInfo[i].innerText)
-            //  nombreTest = charInfo[i].innerText
              })
            }
 }
@@ -60,7 +59,7 @@ async function clickOnCharacter(charName) {
     document.querySelector(".loader-right").classList.remove("hidden")
     let charInfo = await getStarWarsData(pageNum)// väntar på info från API
 
-    var b = document.getElementsByClassName("character-spec")[0]
+    var b = document.getElementsByClassName("character-spec")[0]//Rensar rutan innan man printar nästa characters info
     b.innerHTML = ""
     
     for (let i = 0; i < charInfo.results.length; i++){//loopar igenom hela character listan 
@@ -82,39 +81,32 @@ async function clickOnCharacter(charName) {
 // clickOnCharacter(nombreTest)
 
 // ----------------------------------------------------------------------------------
+// console.log(info)
+// console.log('got result', result.results);
 
-
-        // console.log(info)
-    // console.log('got result', result.results);
-
-    //GRUNDEN FÖR BEARBETNINGEN KOD FÖR PLANETER- RUTAN
-    // console.log("Planet")
-    // console.log(testvariable.homeworld.results[testvariable].name)
-
-
+//GRUNDEN FÖR BEARBETNINGEN KOD FÖR PLANETER- RUTAN
+// console.log("Planet")
+// console.log(testvariable.homeworld.results[testvariable].name)
 //RESULTATEN ANGÅENDE PLANET
 //FETCHAR IFRÅN PLANET API'ET
 //BEHÖVS OM VI SKA HA KARAKTÄRERS HOMEWORLD
 async function getStarWarsPlanet() {
     const reqplanet = await fetch ('https://swapi.dev/api/planets')
     const resplanet = await reqplanet.json()
-
     return resplanet
 };
 
 var homeworldPromise = getStarWarsPlanet();
 
-homeworldPromise.then(function(result) {
 
+homeworldPromise.then(function(result) {
     //LOOPAR IGENOM
     for(var i = 0; i < result.results.length; i++) {
         // console.log(result.results[i].name)
     }
-
 });
-
 getStarWarsData()
-//resultPromise
+
 
 getStarWarsPlanet() //
 //homeworldPromise
@@ -123,27 +115,27 @@ getStarWarsPlanet() //
 function nextPage() {
     if (pageNum < 9) {
         pageNum++
-    }else{
-        pageNum = 1 // När man kommer till sista sidan kommer den att returnera dig till första
+    }else{  // När man kommer till sista sidan kommer den att returnera dig till första
+        pageNum = 1 
     }
     getStarWarsData(pageNum)
     print()
     document.querySelector("p .current-page").innerHTML = pageNum
  }
         
-
  function previousPage() {
     if (pageNum > 1) {
-        pageNum-- // När man inte kan backa mer kommer den att skicka dig till sista sidan
-    }else{
+        pageNum-- 
+    }else{// När man inte kan backa mer kommer den att skicka dig till sista sidan
         pageNum = 9
     }
     getStarWarsData(pageNum)
     print()
     document.querySelector("p .current-page").innerHTML = pageNum
-
 }
-// EVENT LISTENER-------------------------------------------------
+
+
+
 
 
 
