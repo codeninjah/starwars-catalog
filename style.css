@@ -59,7 +59,7 @@ main{
 .left,
 .right{
     margin: -40px 4%;
-    height: 500px;
+    height: 520px;
     width: 400px;
     background-color: lightgray;
     border-top-right-radius: 10px;
@@ -67,15 +67,45 @@ main{
     
 }
 
+.left{
+  position: relative;
+}
+
+button{
+  font-size: 24px;
+  border: none;
+  background-color: lightgray;
+  margin-left: 8px;
+  margin-right: 14px;
+}
+
 .buttons{
+
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+  position: absolute;
+  bottom: 0px;
+  left: auto;
+  right: auto;
+  width: 100%;
 }
+
+.buttons button:hover{
+  cursor: pointer;
+}
+
+.buttons p{
+  letter-spacing: 6px;
+}
+  
 
 .character-spec,
 .planet-spec{
-    height: 220px;
+    height: 230px;
 }
 
 .character-spec{
