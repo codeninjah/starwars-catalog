@@ -91,7 +91,7 @@ async function clickOnCharacter(charName) {
 //FETCHAR IFRÅN PLANET API'ET
 //BEHÖVS OM VI SKA HA KARAKTÄRERS HOMEWORLD
 async function getStarWarsPlanet() {
-    const reqplanet = await fetch ('https://swapi.dev/api/planets')
+    const reqplanet = await fetch ('https://swapi.dev/api/planets') //------> VI KAN FÅ URL FRÅN CHARACTER INFO, VI SPARAR DEN I ETT VARIABEL OCH SEN FETCHAR VARIABELN 
     const resplanet = await reqplanet.json()
     return resplanet
 };
