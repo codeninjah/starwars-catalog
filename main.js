@@ -52,13 +52,21 @@ async function print() { //Skapar en funktion som enbart printar en lista på ch
 print()
 
 //------------------------------------------------------------------------------------
+async function getStarWarsPlanets(currentP) {
+    const req = await fetch (`${currentP}`)
+    const planetJson = await req.json()
+    return planetJson
+};
+let testPlanet = `http://swapi.dev/api/planets/1/`
+//getStarWarsPlanets(testPlanet)
 
 
 // PRINTAR INFORMATION OM EN CHARACTER------------------------------------
 async function clickOnCharacter(charName) {
+    let currentPlanet = ""
     document.querySelector(".loader-right").classList.remove("hidden")
     let charInfo = await getStarWarsData(pageNum)// väntar på info från API
-
+    
     var b = document.getElementsByClassName("character-spec")[0]//Rensar rutan innan man printar nästa characters info
     b.innerHTML = ""
     
@@ -74,9 +82,37 @@ async function clickOnCharacter(charName) {
             b.innerHTML += "<p>" + "Eye color: " + charInfo.results[i].eye_color + "</p>"
             b.innerHTML += "<p>" + "Birth_year: " + charInfo.results[i].birth_year + "</p>"
             b.innerHTML += "<p>" + "Gender: " + charInfo.results[i].gender + "</p>"
+            currentPlanet = charInfo.results[i].homeworld
         }
     }
+    let planetInfo = await getStarWarsPlanets(currentPlanet)
+
+    var c = document.getElementsByClassName("planet-spec")[0]
+    c.innerHTML = ""
+    for (let i = 0; i < charInfo.results.length; i++){
+        if (charName == charInfo.results[i].name) {
+            var c = document.getElementsByClassName("planet-spec")[0]
+            //När den hittar en match använder vi oss av dess index för att hämta resterande data
+            c.innerHTML += "<p>" + planetInfo.name + "</p>"
+            c.innerHTML += "<p>" + "Rotation period: " + planetInfo.rotation_period + "</p>"
+            c.innerHTML += "<p>" + "Orbital period: " + planetInfo.orbital_period + "</p>"
+            c.innerHTML += "<p>" + "Diameter: " + planetInfo.diameter + "</p>"
+            c.innerHTML += "<p>" + "Climate: " + planetInfo.climate + "</p>"
+            c.innerHTML += "<p>" + "Gravity: " + planetInfo.gravity + "</p>"
+            c.innerHTML += "<p>" + "Terrain: " + planetInfo.terrain + "</p>"
+        }
+    }
+
+    //console.log(planetInfo)
     document.querySelector(".loader-right").classList.add("hidden")
+    console.log(planetInfo.name);
+    console.log("Rotation period: " + planetInfo.rotation_period);
+    console.log("Orbital period: " + planetInfo.orbital_period);
+    console.log("Diameter: " + planetInfo.diameter);
+    console.log("Climate: " + planetInfo.climate);
+    console.log("Gravity: " + planetInfo.gravity);
+    console.log("Terrain: " + planetInfo.terrain);
+
 }
 // clickOnCharacter(nombreTest)
 
