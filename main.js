@@ -53,7 +53,7 @@ async function getStarWarsPlanets(currentP) {
 };
 
 //---------------------TEST FÖR ATT HÄMTA ÖVRIG DATA---------------------------------
-//---------------------HÄMTAR SPECIES DATA-----------------------------------------
+//---------------------HÄMTAR PLANETENS DATA-----------------------------------------
 async function getStarWarsSpecies(currentS) {
 
     document.querySelector(".lsd-ring-planet-info").classList.remove("hidden")
@@ -107,7 +107,7 @@ async function clickOnCharacter(charName) {
     let speciesId;
 
     let currentVehicles = ""
-    let currentId;
+    let vehicleId;
 
     let currentStarships = ""
     let starshipsId;
@@ -133,15 +133,44 @@ async function clickOnCharacter(charName) {
             b.innerHTML += "<p>" + "Eye color: " + charInfo.results[i].eye_color + "</p>"
             b.innerHTML += "<p>" + "Birth_year: " + charInfo.results[i].birth_year + "</p>"
             b.innerHTML += "<p>" + "Gender: " + charInfo.results[i].gender + "</p>"
-            currentPlanet = charInfo.results[i].homeworld
+
+            //currentPlanet = charInfo.results[i].homeworld
+
+            //ANVÄNDER TESTVARIABLERNA FÖR ATT FÅ FRAM DATA
+            //SPECIES KAN VARA EN ARRAY
+            //HÄR HÅRDKODAR JAG MED INDEX 0
+            currentSpecies = charInfo.results[i].species
+
+            console.log(currentSpecies)
+            //currentVehicles = charInfo.results[i].vehicles
+            //currentStarships = charInfo.resukts[i].starships
         }
     }
         
-    
+    /*
     planetId = currentPlanet.split("/")
     planetId = planetId[planetId.length - 2]
-        
+    */
 
+    //FÖRSTA TESTET GÖRS MED SPECIES
+    if(currentSpecies.length > 0){ //TESTA SIDA 5 - RATTS TYEREL SÅ FUNKAR DET, ID BLIR 16 - SIDA 4: RUGOR NASS GER ID 12
+    speciesId = currentSpecies[0].split("/")
+    speciesId = speciesId[5]
+    console.log(speciesId)
+    }
+    else {
+        console.log("Not found")
+    }
+   
+
+    //speciesId = speciesId[speciesId.length - 2]
+
+    //vehiclesId;
+    //starshipsId;
+
+    //BORTKOMMENTERAR PLANETINFO FÖR TESTSYFTEN
+    //FÖRSTA TESTET GÖRS MED ATT FÅ FRAM INFO OM SPECIES
+    /*
     let planetInfo = await getStarWarsPlanets(planetId)
    
     var c = document.getElementsByClassName("planet-spec")[0]
@@ -162,6 +191,32 @@ async function clickOnCharacter(charName) {
 
     document.querySelector(".lsd-ring-char-info").classList.add("hidden")
     document.querySelector(".character-spec").classList.remove("hidden")
+    */
+
+    //HÄR BÖRJAR TESTET MED SPECIES
+   let speciesInfo = await getStarWarsSpecies(speciesId)
+   
+   var c = document.getElementsByClassName("planet-spec")[0] //VI BÖR NOG ÖVERVÄGA EVENTUELLA ÄNDRINGAR HÄR
+   c.innerHTML = ""
+   for (let i = 0; i < charInfo.results.length; i++){
+       if (charName == charInfo.results[i].name) {
+           var c = document.getElementsByClassName("planet-spec")[0]//När den hittar en match använder vi oss av dess index för att hämta resterande data
+           
+           c.innerHTML += "<p>" + speciesInfo.name + "</p>"
+           /*
+           c.innerHTML += "<p>" + "Rotation period: " + planetInfo.rotation_period + "</p>"
+           c.innerHTML += "<p>" + "Orbital period: " + planetInfo.orbital_period + "</p>"
+           c.innerHTML += "<p>" + "Diameter: " + planetInfo.diameter + "</p>"
+           c.innerHTML += "<p>" + "Climate: " + planetInfo.climate + "</p>"
+           c.innerHTML += "<p>" + "Gravity: " + planetInfo.gravity + "</p>"
+           c.innerHTML += "<p>" + "Terrain: " + planetInfo.terrain + "</p>"
+           */
+       }
+   }
+
+   document.querySelector(".lsd-ring-char-info").classList.add("hidden")
+   document.querySelector(".character-spec").classList.remove("hidden")
+
 }
 
 //--------------------- KNAPPAR PREVIOUS AND NEXT---------------------
