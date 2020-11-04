@@ -81,17 +81,13 @@ async function clickOnCharacter(charName) {
         }
     }
         
-    for (let i = 0; i < currentPlanet.length; i++) {
-        if (currentPlanet.length == 31) {
-            planetId = currentPlanet[currentPlanet.length - 2] + "/"
-        }
-        else{
-            planetId = currentPlanet[currentPlanet.length - 3] + currentPlanet[currentPlanet.length - 2] + "/"
-        }
-    }
+    
+    planetId = currentPlanet.split("/")
+    planetId = planetId[planetId.length - 2]
+        
 
     let planetInfo = await getStarWarsPlanets(planetId)
-    
+   
     var c = document.getElementsByClassName("planet-spec")[0]
     c.innerHTML = ""
     for (let i = 0; i < charInfo.results.length; i++){
@@ -113,7 +109,8 @@ async function clickOnCharacter(charName) {
 }
 
 //--------------------- KNAPPAR PREVIOUS AND NEXT---------------------
-function nextPage() {
+const leftbtn = document.querySelectorAll("button")[1]
+leftbtn.addEventListener('click', function(){
     if (pageNum < 9) {
         pageNum++
     }else{  // När man kommer till sista sidan kommer den att returnera dig till första
@@ -122,9 +119,10 @@ function nextPage() {
     getStarWarsData(pageNum)
     print()
     document.querySelector("p .current-page").innerHTML = pageNum
- }
-        
- function previousPage() {
+})
+      
+const rightbtn = document.querySelectorAll("button")[0]
+rightbtn.addEventListener('click', function(){
     if (pageNum > 1) {
         pageNum-- 
     }else{// När man inte kan backa mer kommer den att skicka dig till sista sidan
@@ -133,4 +131,4 @@ function nextPage() {
     getStarWarsData(pageNum)
     print()
     document.querySelector("p .current-page").innerHTML = pageNum
-}
+})
