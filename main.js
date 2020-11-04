@@ -52,10 +52,66 @@ async function getStarWarsPlanets(currentP) {
     return planetJson
 };
 
+//---------------------TEST FÖR ATT HÄMTA ÖVRIG DATA---------------------------------
+//---------------------HÄMTAR SPECIES DATA-----------------------------------------
+async function getStarWarsSpecies(currentS) {
+
+    document.querySelector(".lsd-ring-planet-info").classList.remove("hidden")
+    document.querySelector(".planet-spec").classList.add("hidden")
+
+    const req = await fetch (`https://swapi.dev/api/species/ + ${currentS}`)
+    const specieJson = await req.json()
+    
+    document.querySelector(".lsd-ring-planet-info").classList.add("hidden")
+    document.querySelector(".planet-spec").classList.remove("hidden")
+    return specieJson
+};
+
+//-----------------HÄMTAR VEHICLES DATA -------------------------------------
+async function getStarWarsVehicles(currentV) {
+
+    document.querySelector(".lsd-ring-planet-info").classList.remove("hidden")
+    document.querySelector(".planet-spec").classList.add("hidden")
+
+    const req = await fetch (`https://swapi.dev/api/vehicles/ + ${currentV}`)
+    const vehicleJson = await req.json()
+    
+    document.querySelector(".lsd-ring-planet-info").classList.add("hidden")
+    document.querySelector(".planet-spec").classList.remove("hidden")
+    return vehicleJson
+};
+//-----------------HÄMTAR VEHICLES DATA -------------------------------------
+async function getStarWarsStarships(currentSS) {
+
+    document.querySelector(".lsd-ring-planet-info").classList.remove("hidden")
+    document.querySelector(".planet-spec").classList.add("hidden")
+
+    const req = await fetch (`https://swapi.dev/api/starships/ + ${currentSS}`)
+    const shipJson = await req.json()
+    
+    document.querySelector(".lsd-ring-planet-info").classList.add("hidden")
+    document.querySelector(".planet-spec").classList.remove("hidden")
+    return shipJson
+};
+
+//------------------SLUT PÅ FÖRSÖK ATT HÄMTA TESTDATA --------------------
+
+
 // PRINTAR INFORMATION OM EN CHARACTER------------------------------------
 async function clickOnCharacter(charName) {
     let currentPlanet = ""
     let planetId;
+
+    //HÄR FÖLJER VARIABLER FÖR ATT FIXA TILL DE ÖVRIGA TABBARNA
+    let currentSpecies = ""
+    let speciesId;
+
+    let currentVehicles = ""
+    let currentId;
+
+    let currentStarships = ""
+    let starshipsId;
+    //SLUT PÅ TEST VARIABLARNA
 
     document.querySelector(".lsd-ring-char-info").classList.remove("hidden")
     document.querySelector(".character-spec").classList.add("hidden")
