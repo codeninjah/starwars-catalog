@@ -139,7 +139,7 @@ async function clickOnCharacter(charName) {
             //ANVÄNDER TESTVARIABLERNA FÖR ATT FÅ FRAM DATA
             //SPECIES KAN VARA EN ARRAY
             //HÄR HÅRDKODAR JAG MED INDEX 0
-            currentSpecies = charInfo.results[i].species
+            currentSpecies = charInfo.results[i].species //CURRENTSPECIES RETURNERAR ETT ARRAY
 
             console.log(currentSpecies)
             //currentVehicles = charInfo.results[i].vehicles
