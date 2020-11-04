@@ -1,12 +1,3 @@
-//CSS ANIMATIONS------------------------------------------------------------------
-// if(document.getElementsByClassName("planet-spec")[0].innerText.length == 0){
-//     document.getElementsByClassName("planet-spec")[0].classList.add("lds-ring")
-// }
-// else if(document.getElementsByClassName("planet-spec")[0].innerText.length > 0){
-//     document.getElementsByClassName("planet-spec")[0].classList.remove("lds-ring")
-// }
-// -------------------------------------------------------------------------------------
-
 // GLOBALA VARIABLER------------------------------------------------------------
 let pageNum = 1 // Vi hämtar en character list från den första page som finns i API:n
 
@@ -14,16 +5,11 @@ let pageNum = 1 // Vi hämtar en character list från den första page som finns
 async function getStarWarsData(page) {//Gjorde om så att funktionerna tar emot ett page-number variabel som parameter
     const req = await fetch (`https://swapi.dev/api/people/?page= + ${page}`) // här blir våran fetch dynamiskt beroende på vilken sida man vill fetcha
     const res = await req.json()
-    //currentFetch = await req.json()
     return res
 };
-//
-// -----------------------------------------------------------------------------------
-
-
 
 //------------------------------------FUNKTION SOM PRINTAR ALLA CHARACTERS!!!---------
-async function print() { //Skapar en funktion som enbart printar en lista på characters
+async function print() { //Skapar en funktion som printar en lista på characters
     document.querySelector(".loader-character").classList.remove("hidden")// visar preloader
     document.querySelector(".character").classList.add("hidden")
     let result = await getStarWarsData(pageNum) // Sparar listan på ett variabel "result"
@@ -50,12 +36,12 @@ async function print() { //Skapar en funktion som enbart printar en lista på ch
 }
 print()
 
-//------------------------------------------------------------------------
+//---------------------HÄMTAR PLANETENS DATA-----------------------------------------
 async function getStarWarsPlanets(currentP) {
     document.querySelector(".loader-planet-info").classList.remove("hidden")
     document.querySelector(".planet-spec").classList.add("hidden")
 
-    const req = await fetch (`${currentP}`)
+    const req = await fetch (`https://swapi.dev/api/planets/ + ${currentP}`)
     const planetJson = await req.json()
     
     document.querySelector(".loader-planet-info").classList.add("hidden")
@@ -65,8 +51,8 @@ async function getStarWarsPlanets(currentP) {
 
 // PRINTAR INFORMATION OM EN CHARACTER------------------------------------
 async function clickOnCharacter(charName) {
-    //document.querySelector(".loader-planet-info").classList.remove("hidden")
     let currentPlanet = ""
+    let planetId;
     document.querySelector(".loader-char-info").classList.remove("hidden")
     document.querySelector(".character-spec").classList.add("hidden")
     
@@ -91,7 +77,17 @@ async function clickOnCharacter(charName) {
             currentPlanet = charInfo.results[i].homeworld
         }
     }
-    let planetInfo = await getStarWarsPlanets(currentPlanet)
+        
+    for (let i = 0; i < currentPlanet.length; i++) {
+        if (currentPlanet.length == 31) {
+            planetId = currentPlanet[currentPlanet.length - 2] + "/"
+        }
+        else{
+            planetId = currentPlanet[currentPlanet.length - 3] + currentPlanet[currentPlanet.length - 2] + "/"
+        }
+    }
+
+    let planetInfo = await getStarWarsPlanets(planetId)
     
     var c = document.getElementsByClassName("planet-spec")[0]
     c.innerHTML = ""
@@ -110,10 +106,7 @@ async function clickOnCharacter(charName) {
     }
     document.querySelector(".loader-char-info").classList.add("hidden")
     document.querySelector(".character-spec").classList.remove("hidden")
-    //document.querySelector(".loader-planet-info").classList.add("hidden")
-    //slutar loader
 }
-
 
 //--------------------- KNAPPAR PREVIOUS AND NEXT---------------------
 function nextPage() {
